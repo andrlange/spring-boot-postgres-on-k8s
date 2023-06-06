@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: spring-boot-postgres-on-k8
+  namespace: default
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: spring-boot-postgres-on-k8
+      labels:
+        app: spring-boot-postgres-on-k8
+    spec:
+      containers:
+      - name: spring-boot-postgres-on-k8
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              configMapKeyRef:
+                name: postgres-config
+                key: postgres_user
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: postgres-config
+                key: postgres_password
+          - name: POSTGRES_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: hostname-config
+                key: postgres_host
+        image: <your Docker Hub account>/spring-boot-postgres-on-k8s:v1
