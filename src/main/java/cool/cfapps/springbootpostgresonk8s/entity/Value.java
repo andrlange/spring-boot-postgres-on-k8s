@@ -20,5 +20,6 @@ public class Value {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String description;
+
 }
 

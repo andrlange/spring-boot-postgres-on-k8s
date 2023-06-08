@@ -4,19 +4,21 @@
     <body>
     <h2>Spring Boot - Postgres - Demo</h2>
     <h3>The last description will be saved into Postgres and shown as Title</h3>
-    <p style="color:blue">
-        Version 1.0 is blue.
+    <p style="color:green">
+        Version 2.1 is green.
     </p>
-        <tr th:if="${description == null}">
+        <tr th:if="${viewEntity.description == null}">
             <div>No description saved</div>
         </tr>
-        <tr th:if="${description != null}">
-            <div th:text="${description}"></div>
+        <tr th:if="${viewEntity.description != null}">
+            <div th:text="${viewEntity.description}"></div>
         </tr>
 
         <form method="post" action="/save" class="form-actions">
             <input type="text" name="description" />
             <input type="submit" value="Save Description" />
         </form>
+    <p>History of the last five elements:</p>
+    <p th:text="${viewEntity.history() }"></p>
     </body>
 </html>
