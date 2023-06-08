@@ -1,0 +1,24 @@
+version: '3.1' # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+
+  postgres:
+    image: postgres:15.2-alpine
+    container_name: linklist-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgres/data
+    volumes:
+      - ~/.docker-conf/postgres/linklist:/var/lib/postgres/data
+    ports:
+      - 5432:5432
+    networks:
+      - postgres-compose-network
+
+
+networks:
+  postgres-compose-network:
+    driver: bridge
